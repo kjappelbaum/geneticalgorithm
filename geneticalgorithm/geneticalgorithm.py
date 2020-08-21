@@ -121,7 +121,7 @@ class GeneticAlgorithm:
             https://github.com/rmsolgi/geneticalgorithm
 
         """
-        self.__name__ = geneticalgorithm
+        self.__name__ = GeneticAlgorithm
         # input function
         assert callable(function), "function must be callable"
 
