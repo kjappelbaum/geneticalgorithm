@@ -39,8 +39,8 @@ solve the defined optimization problem as follows:
 
     def f(X):
         return np.sum(X)
-        
-        
+
+
     varbound=np.array([[0,10]]*3)
 
     model=ga(function=f,dimension=3,variable_type='real',variable_boundaries=varbound)
@@ -70,7 +70,7 @@ progress of the genetic algorithm (GA) and then the solution, objective
 function value and the convergence curve as follows:
 
 .. figure:: https://github.com/rmsolgi/geneticalgorithm/blob/master/genetic_algorithm_convergence.gif
-   :alt: 
+   :alt:
 
 Also we can access to the best answer of the defined optimization
 problem found by geneticalgorithm as a dictionary and a report of the
@@ -101,8 +101,8 @@ In this case the code is as the following:
 
     def f(X):
         return np.sum(X)
-        
-        
+
+
     varbound=np.array([[0,10]]*3)
 
     model=ga(function=f,dimension=3,variable_type='int',variable_boundaries=varbound)
@@ -127,7 +127,7 @@ the code is as the following:
 
     def f(X):
         return np.sum(X)
-        
+
 
     model=ga(function=f,dimension=30,variable_type='bool')
 
@@ -155,7 +155,7 @@ as the following:
 
     def f(X):
         return np.sum(X)
-        
+
     varbound=np.array([[0.5,1.5],[1,100],[0,1]])
     vartype=np.array([['real'],['int'],['int']])
     model=ga(function=f,dimension=3,variable_type_mixed=vartype,variable_boundaries=varbound)
@@ -187,7 +187,7 @@ find the maximum of f(X)=x1+x2+x3 where X is a set of real variables in
 
     def f(X):
         return -np.sum(X)
-        
+
     varbound=np.array([[0,10]]*3)
 
     model=ga(function=f,dimension=3,variable_type='real',variable_boundaries=varbound)
@@ -216,7 +216,7 @@ below:
         if X[0]+X[1]<2:
             pen=500+1000*(2-X[0]-X[1])
         return np.sum(X)+pen
-        
+
     varbound=np.array([[0,10]]*3)
 
     model=ga(function=f,dimension=3,variable_type='real',variable_boundaries=varbound)
@@ -285,7 +285,7 @@ Another way of accessing this dictionary is using the command below:
 
     def f(X):
         return np.sum(X)
-        
+
 
     model=ga(function=f,dimension=3,variable_type='bool')
 
@@ -301,8 +301,8 @@ running geneticalgorithm for our first simple example again:
 
     def f(X):
         return np.sum(X)
-        
-        
+
+
     varbound=np.array([[0,10]]*3)
 
     algorithm_param = {'max_num_iteration': 3000,\
@@ -462,7 +462,7 @@ solution of the last iteration. The difference between the convergence
 curve of standard GA and elitist GA is shown below:
 
 .. figure:: https://github.com/rmsolgi/geneticalgorithm/blob/master/genetic_algorithm_convergence_curve.gif
-   :alt: 
+   :alt:
 
 Hints on how to adjust genetic algorithm's parameters
 -----------------------------------------------------
@@ -539,40 +539,7 @@ Implementation of geneticalgorithm for some benchmark problems:
 ----------------------------------------------------------------
 
 .. figure:: https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Rastrigin_function.png/600px-Rastrigin_function.png
-   :alt: 
-
-.. code:: python
-
-
-    import numpy as np
-    import math
-    from geneticalgorithm import geneticalgorithm as ga
-
-    def f(X):
-
-        dim=len(X)         
-        
-        OF=0
-        for i in range (0,dim):
-            OF+=(X[i]**2)-10*math.cos(2*math.pi*X[i])+10
-     
-        return OF
-        
-        
-    varbound=np.array([[-5.12,5.12]]*2)
-
-    model=ga(function=f,dimension=2,variable_type='real',variable_boundaries=varbound)
-
-    model.run()
-
-.. figure:: https://github.com/rmsolgi/geneticalgorithm/blob/master/genetic_algorithm_Rastrigin.gif
-   :alt: 
-
-`Ackley <https://en.wikipedia.org/wiki/Ackley_function>`__
-----------------------------------------------------------
-
-.. figure:: https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Ackley%27s_function.pdf/page1-600px-Ackley%27s_function.pdf.jpg
-   :alt: 
+   :alt:
 
 .. code:: python
 
@@ -584,31 +551,28 @@ Implementation of geneticalgorithm for some benchmark problems:
     def f(X):
 
         dim=len(X)
-            
-        t1=0
-        t2=0
+
+        OF=0
         for i in range (0,dim):
-            t1+=X[i]**2
-            t2+=math.cos(2*math.pi*X[i])     
-                
-        OF=20+math.e-20*math.exp((t1/dim)*-0.2)-math.exp(t2/dim)
-     
+            OF+=(X[i]**2)-10*math.cos(2*math.pi*X[i])+10
+
         return OF
-        
-    varbound=np.array([[-32.768,32.768]]*2)
+
+
+    varbound=np.array([[-5.12,5.12]]*2)
 
     model=ga(function=f,dimension=2,variable_type='real',variable_boundaries=varbound)
 
     model.run()
 
-.. figure:: https://github.com/rmsolgi/geneticalgorithm/blob/master/genetic_algorithm_Ackley.gif
-   :alt: 
+.. figure:: https://github.com/rmsolgi/geneticalgorithm/blob/master/genetic_algorithm_Rastrigin.gif
+   :alt:
 
-`Weierstrass <http://infinity77.net/global_optimization/test_functions_nd_W.html>`__
-------------------------------------------------------------------------------------
+`Ackley <https://en.wikipedia.org/wiki/Ackley_function>`__
+----------------------------------------------------------
 
-.. figure:: http://infinity77.net/global_optimization/_images/Weierstrass.png
-   :alt: 
+.. figure:: https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Ackley%27s_function.pdf/page1-600px-Ackley%27s_function.pdf.jpg
+   :alt:
 
 .. code:: python
 
@@ -619,8 +583,44 @@ Implementation of geneticalgorithm for some benchmark problems:
 
     def f(X):
 
-        dim=len(X) 
-       
+        dim=len(X)
+
+        t1=0
+        t2=0
+        for i in range (0,dim):
+            t1+=X[i]**2
+            t2+=math.cos(2*math.pi*X[i])
+
+        OF=20+math.e-20*math.exp((t1/dim)*-0.2)-math.exp(t2/dim)
+
+        return OF
+
+    varbound=np.array([[-32.768,32.768]]*2)
+
+    model=ga(function=f,dimension=2,variable_type='real',variable_boundaries=varbound)
+
+    model.run()
+
+.. figure:: https://github.com/rmsolgi/geneticalgorithm/blob/master/genetic_algorithm_Ackley.gif
+   :alt:
+
+`Weierstrass <http://infinity77.net/global_optimization/test_functions_nd_W.html>`__
+------------------------------------------------------------------------------------
+
+.. figure:: http://infinity77.net/global_optimization/_images/Weierstrass.png
+   :alt:
+
+.. code:: python
+
+
+    import numpy as np
+    import math
+    from geneticalgorithm import geneticalgorithm as ga
+
+    def f(X):
+
+        dim=len(X)
+
         a=0.5
         b=3
         OF=0
@@ -629,14 +629,14 @@ Implementation of geneticalgorithm for some benchmark problems:
             for k in range (0,21):
                 t1+=(a**k)*math.cos((2*math.pi*(b**k))*(X[i]+0.5))
             OF+=t1
-        t2=0    
+        t2=0
         for k in range (0,21):
             t2+=(a**k)*math.cos(math.pi*(b**k))
         OF-=dim*t2
-     
+
         return OF
-        
-        
+
+
     varbound=np.array([[-0.5,0.5]]*2)
 
     algorithm_param = {'max_num_iteration': 1000,\
@@ -656,7 +656,7 @@ Implementation of geneticalgorithm for some benchmark problems:
     model.run()
 
 .. figure:: https://github.com/rmsolgi/geneticalgorithm/blob/master/genetic_algorithm_Weierstrass.gif
-   :alt: 
+   :alt:
 
 License
 ----------------
@@ -681,4 +681,3 @@ IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
 CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
